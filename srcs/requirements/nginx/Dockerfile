@@ -1,11 +1,11 @@
-FROM alpine
+FROM debian:buster
 
-COPY . /nginx
+RUN	apt update && apt upgrade
 
-RUN apk update
+RUN	apt	install nginx -y
 
-RUN apk add nginx
+RUN rm -rf /etc/nginx/nginx.conf
 
-RUN apk add openssl
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
-CMD [ "nginx" ]
+CMD ["nginx", "-g", "daemon off;"]

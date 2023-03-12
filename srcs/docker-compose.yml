@@ -1,0 +1,26 @@
+version: "3.6"
+services:
+  # nginx:
+  #   build: ./requirements/nginx
+  #   container_name: nginx
+  #   volumes:
+  #     - mariadb_vol:/var/www/html/
+  #   ports:
+  #     - '3000:80'
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb_vol:/var/lib/mysql
+  # wordpress:
+  #   build: ./requirements/wordpress
+  #   container_name: wordpress
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - wodrpress_vol:/var/www/html/
+volumes:
+  wodrpress_vol:
+  mariadb_vol:
