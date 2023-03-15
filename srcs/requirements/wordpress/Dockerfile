@@ -10,9 +10,9 @@ RUN useradd -m -p "$WWW_DATA_USER_PASS" www-data
 
 RUN mkdir -p /var/www/html
 
-RUN cd /var/www/html && wget https://wordpress.org/latest.tar.gz && tar xf latest.tar.gz && rm -rf latest.tar.gz && chown -R www-data: wordpress
+# RUN cd /var/www/html && wget https://wordpress.org/latest.tar.gz && tar xf latest.tar.gz && rm -rf latest.tar.gz && chown -R www-data: wordpress
 
-RUN apt install php7.3-cli php7.3-fpm php7.3-mysql php7.3-json php7.3-opcache php7.3-mbstring php7.3-xml php7.3-gd php7.3-curl -y
+RUN apt install php7.3-cli php7.3-fpm php7.3-mysql php7.3-json php7.3-opcache php7.3-mbstring php7.3-xml php7.3-gd php7.3-curl mariadb-client -y
 
 COPY ./tools/script.sh script.sh
 
@@ -22,6 +22,14 @@ RUN touch /run/php/php7.3-fpm.pid
 
 RUN chown -R www-data: /run/php
 
-# CMD ["service", "php7.3-fpm", "start", "&&", "while", "1"]
+RUN apt install curl -y
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+RUN chmod +x wp-cli.phar
+
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+RUN apt install less sendmail -y
 
 CMD ["bash", "script.sh"]

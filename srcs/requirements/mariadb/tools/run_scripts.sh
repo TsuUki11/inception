@@ -6,7 +6,7 @@ sed -i "s+#port                   = 3306+port                    = 3306+g" /etc/
 
 service mysql start
 
-sleep 2
+sleep 5
 
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
 
@@ -15,6 +15,12 @@ mysql -u root -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED by '$MY
 mysql -u root -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';"
 
 mysql -u root -e "FLUSH PRIVILEGES;"
+# echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';" | mysql -u root
+
+# echo "FLUSH PRIVILEGES;" | mysql -u root -p$ROOT_PASSWORD
+
+
+# wp core install --url=<aaitoual.42.fr> --title=<inception> --admin_user=<tsuki> --admin_password=<tsuki> --admin_email=<abdellahkai000@gmail.com>
 
 mysqladmin shutdown
 
