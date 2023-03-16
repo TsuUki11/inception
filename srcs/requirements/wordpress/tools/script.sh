@@ -9,7 +9,7 @@ while ! wp config create --dbname=$WORDPRESS_DB_NAME \
                          --dbpass=$WORDPRESS_DB_PASSWORD \
                          --dbhost=mariadb \
                          --path=/var/www/html/wordpress \
-                         --allow-root; do
+                         --allow-root && ! cat /var/www/html/wordpress/wp-config.php; do
     sleep 3
 done
 
