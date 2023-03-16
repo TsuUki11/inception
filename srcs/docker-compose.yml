@@ -6,7 +6,7 @@ services:
     volumes:
       - wordpress_vol:/var/www/html/
     ports:
-      - '3000:80'
+      - '443:443'
     depends_on:
       - wordpress
   mariadb:
