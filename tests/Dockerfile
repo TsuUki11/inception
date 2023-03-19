@@ -26,3 +26,12 @@ openssl req -new -key inception.key -out inception.csr "/C=$country/ST=$state/L=
 openssl x509 -req -in inception.csr -signkey inception.key -out inception.crt
 
 mv inception.* /etc/nginx/ssl
+
+apt install redis-server -y
+
+
+6379
+
+sed -i "s+# maxmemory <bytes>+maxmemory 64M+g" /etc/redis/redis.conf
+sed -i "s+# maxmemory-policy noeviction+maxmemory-policy allkeys-lfu+" /etc/redis/redis.conf
+service redis-server status

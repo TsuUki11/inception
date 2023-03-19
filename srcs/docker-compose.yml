@@ -26,6 +26,9 @@ services:
       - .env
     volumes:
       - wordpress_vol:/var/www/html/
+  redis:
+    build: ./bonus/redis
+    container_name: redis
 volumes:
   wordpress_vol:
   mariadb_vol:
