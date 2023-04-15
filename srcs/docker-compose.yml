@@ -26,9 +26,14 @@ services:
       - .env
     volumes:
       - wordpress_vol:/var/www/html/
-  redis:
-    build: ./bonus/redis
-    container_name: redis
+  ftp:
+    build:
+      context: ./bonus/FTP
+    container_name: FTP
+    volumes:
+      - wordpress_vol:/var/www/html
+    env_file:
+      - .env
 volumes:
   wordpress_vol:
   mariadb_vol:
