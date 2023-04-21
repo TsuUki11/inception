@@ -8,7 +8,17 @@ RUN useradd -m -p "$WWW_DATA_USER_PASS" www-data
 
 RUN mkdir -p /var/www/html
 
-RUN apt install php7.3-cli php7.3-fpm php7.3-mysql php7.3-json php7.3-opcache php7.3-mbstring php7.3-xml php7.3-gd php7.3-curl mariadb-client wget -y
+# RUN apt install lsb-release -y
+
+# RUN apt install -y gnupg ca-certificates apt-transport-https wget
+
+# RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+
+# RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
+
+# RUN apt update
+
+RUN apt install php7.3-cli php7.3-fpm php-mysql php7.3-json php7.3-opcache php7.3-mbstring php7.3-xml php7.3-gd php7.3-curl mariadb-client wget -y
 
 #redis instalation
 
@@ -32,4 +42,8 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN apt install less sendmail -y
 
+COPY ./conf/php.ini /php.ini
+
 CMD ["bash", "script.sh"]
+
+# 9d4aeb674a17

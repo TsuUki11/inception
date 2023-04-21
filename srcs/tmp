@@ -23,3 +23,10 @@ volumes:
     default:
         name: inception_net
 
+apt update
+apt install curl gnupg -y
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
+apt install nodejs -y
+npx create-next-app my-about-me
+//create a file called about.js
+npm run dev

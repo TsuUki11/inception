@@ -4,7 +4,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wordpress_vol3:/var/www/html/
+      - wordpress_vol6:/var/www/html/
     ports:
       - '443:443'
     depends_on:
@@ -16,7 +16,7 @@ services:
     env_file:
       - .env
     volumes:
-      - mariadb_vol3:/var/lib/mysql/
+      - mariadb_vol6:/var/lib/mysql/
   wordpress:
     depends_on:
       - mariadb
@@ -25,15 +25,30 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_vol3:/var/www/html/
+      - wordpress_vol6:/var/www/html/
   ftp:
     build:
       context: ./bonus/FTP
     container_name: FTP
     volumes:
-      - wordpress_vol3:/var/www/html/
+      - wordpress_vol6:/var/www/html/
     env_file:
       - .env
+  static_website:
+    build: ./bonus/static_website
+    container_name: static_website
+    ports:
+      - '3000:3000'
 volumes:
-  wordpress_vol3:
-  mariadb_vol3:
+    wordpress_vol6:
+    #     driver: local
+    #     driver_opts:
+    #         o: "bind"
+    #         type: "none"
+    #         device: "/Users/aaitoual/Desktop/data/wordpress/"
+    mariadb_vol6:
+        # driver: local
+        # driver_opts:
+        #     o: "bind"
+        #     type: "none"
+        #     device: "/Users/aaitoual/Desktop/data/mariadb/"
