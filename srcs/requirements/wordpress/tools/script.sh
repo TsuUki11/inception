@@ -1,9 +1,9 @@
 #!/bin/bash
-
-# sed -i "s+/run/php/php7.3-fpm.sock+0.0.0.0:9000+g" /etc/php/7.3/fpm/pool.d/www.conf
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
 wp core download --path=/var/www/html/wordpress --allow-root
+
+cd /var/www/html/wordpress
 
 while ! wp config create --dbname=$WORDPRESS_DB_NAME \
                          --dbuser=$WORDPRESS_DB_USER \
@@ -14,7 +14,7 @@ while ! wp config create --dbname=$WORDPRESS_DB_NAME \
     sleep 3
 done
 
-wp core install --url=127.0.0.1 --title=inception --admin_user=$ADMIN_USERNAME --admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL --path=/var/www/html/wordpress --allow-root
+wp core install --url=aaitoual.42.fr --title=inception --admin_user=$ADMIN_USERNAME --admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL --path=/var/www/html/wordpress --allow-root
 
 #redis :///////////////////////////////////////////
 sed -i "s+# maxmemory <bytes>+maxmemory 128M+g" /etc/redis/redis.conf
@@ -27,7 +27,6 @@ service redis-server start
 wp redis enable --path=/var/www/html/wordpress --allow-root
 
 #adminer :///////////////////////////////////////////
-wget "http://www.adminer.org/latest.php" -O /var/www/html/wordpress/adminer.php
 
 
 wp user create TOM tom@gmail.com --role=author --path=/var/www/html/wordpress --allow-root

@@ -1,12 +1,12 @@
 FROM debian:buster
 
-RUN apt update && apt upgrade
+RUN apt-get update && apt-get upgrade
 
-RUN apt install curl gnupg -y
+RUN apt-get install curl gnupg -y
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
-RUN apt install nodejs -y
+RUN apt-get install nodejs -y
 
 RUN npx -y create-react-app my-about-me
 

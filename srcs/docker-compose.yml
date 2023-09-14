@@ -26,19 +26,29 @@ services:
       - .env
     volumes:
       - wordpress_vol6:/var/www/html/
+
+  adminer:
+    depends_on:
+      - mariadb
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    volumes:
+      - wordpress_vol6:/var/www/html/
+  
   ftp:
-    build:
-      context: ./bonus/FTP
+    build: ./requirements/bonus/ftp
     container_name: FTP
     volumes:
       - wordpress_vol6:/var/www/html/
     env_file:
       - .env
-  static_website:
-    build: ./bonus/static_website
-    container_name: static_website
     ports:
-      - '3000:3000'
+      - '21:21'
+  # static_website:
+  #   build: ./requirements/bonus/static_website
+  #   container_name: static_website
+  #   ports:
+  #     - '3000:3000'
 volumes:
     wordpress_vol6:
     #     driver: local

@@ -1,8 +1,8 @@
 FROM debian:buster
 
-RUN apt update && apt upgrade
+RUN apt-get update && apt-get upgrade
 
-RUN apt install mariadb-server -y
+RUN apt-get install mariadb-server -y
 
 COPY ./tools/ /scripts
 

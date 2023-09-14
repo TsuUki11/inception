@@ -1,10 +1,10 @@
 FROM debian:buster
 
-RUN apt update
+RUN apt-get update
 
-RUN apt upgrade
+RUN apt-get upgrade
 
-RUN apt install vsftpd -y
+RUN apt-get install vsftpd -y
 
 RUN mkdir -p /var/www/html
 
