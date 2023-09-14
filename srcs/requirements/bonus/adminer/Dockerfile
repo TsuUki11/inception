@@ -2,7 +2,7 @@ FROM debian:buster
 
 RUN apt-get update && apt-get upgrade
 
-RUN apt-get install php7.3-fpm -y
+RUN apt-get install php7.3-fpm wget -y
 
 COPY ./tools/script.sh script.sh
 

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ ! -d "/var/www/html/wordpress/adminer" ]; then
+if [ ! -f "/var/www/html/wordpress/adminer/adminer.php" ]; then
 
 mkdir -p /var/www/html/wordpress/adminer
 
