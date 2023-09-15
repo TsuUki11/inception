@@ -8,8 +8,14 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 RUN apt-get install nodejs -y
 
-RUN npx -y create-react-app my-about-me
+RUN npx -y create-react-app about-me
 
 COPY ./tools/script.sh /script.sh
+
+RUN rm -rf /about-me/public/index.html
+
+COPY ./tools/profile-master /profile-master
+
+# RUN chmod +x script.sh
 
 CMD ["bash", "/script.sh"];

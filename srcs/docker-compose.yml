@@ -50,12 +50,18 @@ services:
     container_name: redis
     volumes:
       - wordpress_vol22:/var/www/html/
-
-  # static_website:
-  #   build: ./requirements/bonus/static_website
-  #   container_name: static_website
-  #   ports:
-  #     - '3000:3000'
+  node:
+    build: ./requirements/bonus/node
+    container_name: node
+    ports:
+      - '3001:3000'
+  static_website:
+    build: ./requirements/bonus/static_website
+    container_name: static_website
+    depends_on:
+      - node
+    ports:
+      - '3000:3000'
 volumes:
     wordpress_vol22:
     #     driver: local
@@ -69,3 +75,4 @@ volumes:
         #     o: "bind"
         #     type: "none"
         #     device: "/Users/aaitoual/Desktop/data/mariadb/"
+    node_vol22:

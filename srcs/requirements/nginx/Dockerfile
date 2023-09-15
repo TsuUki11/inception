@@ -2,11 +2,9 @@ FROM debian:buster
 
 RUN	apt-get update && apt-get upgrade
 
-RUN	apt-get	install nginx -y
+RUN	apt-get	install nginx openssl -y
 
-RUN rm -rf /etc/nginx/nginx.conf
-
-RUN apt-get install openssl
+# RUN rm -rf /etc/nginx/nginx.conf
 
 RUN mkdir /etc/nginx/ssl
 
@@ -18,6 +16,6 @@ RUN openssl x509 -req -in inception.csr -signkey inception.key -out inception.cr
 
 RUN mv inception.* /etc/nginx/ssl
 
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/server.conf /etc/nginx/conf.d/
 
 CMD ["nginx", "-g", "daemon off;"]
