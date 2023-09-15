@@ -22,7 +22,7 @@ RUN apt-get install php7.3-cli php7.3-fpm php-mysql php7.3-json php7.3-opcache p
 
 #redis instalation
 
-RUN apt-get install redis-server php-redis -y
+# RUN apt-get install redis-server php-redis -y
 
 COPY ./tools/script.sh script.sh
 

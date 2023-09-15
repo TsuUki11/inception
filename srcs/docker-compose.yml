@@ -4,7 +4,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wordpress_vol6:/var/www/html/
+      - wordpress_vol22:/var/www/html/
     ports:
       - '443:443'
     depends_on:
@@ -16,7 +16,7 @@ services:
     env_file:
       - .env
     volumes:
-      - mariadb_vol6:/var/lib/mysql/
+      - mariadb_vol22:/var/lib/mysql/
   wordpress:
     depends_on:
       - mariadb
@@ -25,7 +25,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_vol6:/var/www/html/
+      - wordpress_vol22:/var/www/html/
 
   adminer:
     depends_on:
@@ -33,30 +33,37 @@ services:
     build: ./requirements/bonus/adminer
     container_name: adminer
     volumes:
-      - wordpress_vol6:/var/www/html/
-  
+      - wordpress_vol22:/var/www/html/
   ftp:
     build: ./requirements/bonus/ftp
     container_name: FTP
     volumes:
-      - wordpress_vol6:/var/www/html/
+      - wordpress_vol22:/var/www/html/
     env_file:
       - .env
     ports:
       - '21:21'
+  redis:
+    depends_on:
+      - wordpress
+    build: ./requirements/bonus/redis
+    container_name: redis
+    volumes:
+      - wordpress_vol22:/var/www/html/
+
   # static_website:
   #   build: ./requirements/bonus/static_website
   #   container_name: static_website
   #   ports:
   #     - '3000:3000'
 volumes:
-    wordpress_vol6:
+    wordpress_vol22:
     #     driver: local
     #     driver_opts:
     #         o: "bind"
     #         type: "none"
     #         device: "/Users/aaitoual/Desktop/data/wordpress/"
-    mariadb_vol6:
+    mariadb_vol22:
         # driver: local
         # driver_opts:
         #     o: "bind"
