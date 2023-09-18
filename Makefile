@@ -1,7 +1,7 @@
 all: build up
 
 build:
-	# mkdir -p /home/aaitoual/data/wordpress_volume /home/aaitoual/data/mariadb_volume
+	mkdir -p /home/aaitoual/data/wordpress_volume /home/aaitoual/data/mariadb_volume
 	docker-compose -f ./srcs/docker-compose.yml build
 
 up:
@@ -14,6 +14,6 @@ stop_volume:
 	docker-compose -f ./srcs/docker-compose.yml down -v
 
 clean: stop_volume
-	rm -rf /home/aaitoual/data/
+	sudo rm -rf /home/aaitoual/data/
 	docker system prune -f -a
 

@@ -1,10 +1,10 @@
 #! /bin/bash
 
-if [ ! -f "/var/www/html/wordpress/adminer/adminer.php" ]; then
+if [ ! -f "/var/www/html/adminer/adminer.php" ]; then
 
-mkdir -p /var/www/html/wordpress/adminer
+mkdir -p /var/www/html/adminer
 
-wget "http://www.adminer.org/latest.php" -O /var/www/html/wordpress/adminer/adminer.php
+wget "http://www.adminer.org/latest.php" -O /var/www/html/adminer/adminer.php
 
 fi
 

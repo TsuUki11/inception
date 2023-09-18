@@ -2,6 +2,7 @@ version: "3.6"
 services:
   nginx:
     build: ./requirements/nginx
+    image: nginx
     container_name: nginx
     networks:
       - main-network
@@ -16,6 +17,7 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+    image: mariadb
     container_name: mariadb
     env_file:
       - .env
@@ -28,6 +30,7 @@ services:
   wordpress:
     depends_on:
       - mariadb
+    image: wordpress
     build: ./requirements/wordpress
     container_name: wordpress
     env_file:
@@ -41,6 +44,7 @@ services:
   adminer:
     depends_on:
       - mariadb
+    image: adminer
     build: ./requirements/bonus/adminer
     container_name: adminer
     networks:
@@ -49,9 +53,10 @@ services:
       - wordpress_vol22:/var/www/html/
     restart: always
 
-  ftp:
+  ftp-server:
     build: ./requirements/bonus/ftp
     container_name: ftp-server
+    image: ftp-server
     networks:
       - main-network
     volumes:
@@ -69,6 +74,7 @@ services:
       - main-network
     build: ./requirements/bonus/redis
     container_name: redis
+    image: redis
     volumes:
       - wordpress_vol22:/var/www/html/
     restart: always
@@ -76,6 +82,7 @@ services:
   node:
     build: ./requirements/bonus/node
     container_name: node
+    image: node
     networks:
       - main-network
     ports:
@@ -85,17 +92,18 @@ services:
   static_website:
     build: ./requirements/bonus/static_website
     container_name: static_website
-    depends_on:
-      - node
+    image: static_website
+    # depends_on:
+    #   - node
     networks:
       - main-network
     ports:
-      - '3000:3000'
+      - '8001:8001'
     restart: always
 
 networks:
   main-network:
-
+    driver: bridge
 
 volumes:
     wordpress_vol22:
@@ -103,10 +111,10 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: "/Users/aaitoual/Desktop/data/wordpress/"
+        device: "/home/aaitoual/data/wordpress_volume"
     mariadb_vol22:
       driver: local
       driver_opts:
         type: none
         o: bind
-        device: "/Users/aaitoual/Desktop/data/mariadb/"
+        device: "/home/aaitoual/data/mariadb_volume"
